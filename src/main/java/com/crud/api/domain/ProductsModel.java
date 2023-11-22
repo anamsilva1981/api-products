@@ -1,5 +1,6 @@
 package com.crud.api.domain;
 
+import com.crud.api.cross.Rating;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class ProductsModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column
+    private Long id_products;
 
     @Column
     private String name;
@@ -41,7 +43,7 @@ public class ProductsModel {
     private Boolean status;
 
     @Column
-    private String rating;
+    private Rating rating;
 
     @Column
     private BigDecimal price;
@@ -49,8 +51,9 @@ public class ProductsModel {
     @Column
     private String image;
 
-    @Column
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private CategoryModel category;
 
     @Column
     private String subCategory;
